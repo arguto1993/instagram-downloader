@@ -30,17 +30,22 @@ def download_public_videos(username: str, max_posts: int = 10, start_post: int =
 
         position = 1
         downloaded = 0
+        skipped_latest = 0
+        skipped_media = 0
         for post in profile.get_posts():
             if downloaded >= max_posts:
                 print("Reached maximum number of posts to download.")
                 break
+
             if position < start_post:
-                print(f"Skipping post {position + 1}: {post.shortcode}")
+                print(f"Skipping post {position}: {post.shortcode}")
+                skipped_latest += 1
                 position += 1
                 continue
 
             if not post.is_video:
                 print(f"Skipping photo post: {post.shortcode}")
+                skipped_media += 1
                 position += 1
                 continue
 
@@ -56,6 +61,11 @@ def download_public_videos(username: str, max_posts: int = 10, start_post: int =
             print(f"Downloaded posts {downloaded}: {post.shortcode}")
             position += 1
 
+        total_skipped = skipped_latest + skipped_media
+        print(f"\nSkipped latest posts: {skipped_latest}")
+        print(f"Skipped photo posts: {skipped_media}")
+        print(f"Total skipped posts: {total_skipped}")
+        print(f"Total downloaded posts: {downloaded}")
         print("Done!")
 
     except instaloader.exceptions.ProfileNotExistsException:
@@ -94,17 +104,22 @@ def download_public_photos(username: str, max_posts: int = 10, start_post: int =
 
         position = 1
         downloaded = 0
+        skipped_latest = 0
+        skipped_media = 0
         for post in profile.get_posts():
             if downloaded >= max_posts:
                 print("Reached maximum number of posts to download.")
                 break
+
             if position < start_post:
-                print(f"Skipping post {position + 1}: {post.shortcode}")
+                print(f"Skipping post {position}: {post.shortcode}")
+                skipped_latest += 1
                 position += 1
                 continue
 
             if post.is_video:
                 print(f"Skipping video post: {post.shortcode}")
+                skipped_media += 1
                 position += 1
                 continue
 
@@ -120,6 +135,11 @@ def download_public_photos(username: str, max_posts: int = 10, start_post: int =
             print(f"Downloaded posts {downloaded}: {post.shortcode}")
             position += 1
 
+        total_skipped = skipped_latest + skipped_media
+        print(f"\nSkipped latest posts: {skipped_latest}")
+        print(f"Skipped video posts: {skipped_media}")
+        print(f"Total skipped posts: {total_skipped}")
+        print(f"Total downloaded posts: {downloaded}")
         print("Done!")
 
     except instaloader.exceptions.ProfileNotExistsException:
