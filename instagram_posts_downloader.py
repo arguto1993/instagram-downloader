@@ -74,7 +74,7 @@ def download_public_videos(username: str, max_posts: int = 10, start_post: int =
                 post, target=Path("downloads") / username / post_timestamp
             )
             downloaded += 1
-            log_message(f"Downloaded posts {downloaded}: {post.shortcode}")
+            log_message(f"Downloaded post {downloaded}/{max_posts}: {post.shortcode}")
             position += 1
 
         total_skipped = skipped_latest + skipped_media
@@ -148,7 +148,7 @@ def download_public_photos(username: str, max_posts: int = 10, start_post: int =
                 post, target=Path("downloads") / username / post_timestamp
             )
             downloaded += 1
-            log_message(f"Downloaded posts {downloaded}: {post.shortcode}")
+            log_message(f"Downloaded post {downloaded}/{max_posts}: {post.shortcode}")
             position += 1
 
         total_skipped = skipped_latest + skipped_media
