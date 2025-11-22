@@ -12,10 +12,10 @@ def log_message(message: str):
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     log_entry = f"[{timestamp}] {message}"
     print(log_entry)
-    
+
     # Ensure logs directory exists
     LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
-    
+
     # Append to log file
     with open(LOG_FILE, "a", encoding="utf-8") as f:
         f.write(log_entry + "\n")
