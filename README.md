@@ -17,10 +17,6 @@ A Python script to download Instagram posts (photos, videos, captions) from publ
 ## Installation
 
 1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/insta-loader.git
-   cd insta-loader
-   ```
 
 2. **Create virtual environment**
    ```bash
