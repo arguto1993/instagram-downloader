@@ -1,4 +1,4 @@
-# Instagram Posts Downloader
+# Instagram Feeds Downloader
 
 A Python script to download Instagram posts (photos, videos, captions) from public profiles for personal archiving or AI/ML projects.
 
@@ -50,7 +50,7 @@ download_public_videos(username="ar.guto", max_posts=5, start_post=1)
 
 - **username** (str): Instagram profile username to download from
 - **max_posts** (int): Maximum number of posts to download (default: 10)
-- **start_post** (int): Starting position (default: 1)
+- **start_post** (int): Starting position (default: 1, index starts from 1, not 0)
 
 ## Output Structure
 
