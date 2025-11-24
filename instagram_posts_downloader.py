@@ -1,7 +1,8 @@
 import instaloader
-from pathlib import Path
-from os import makedirs
+import time
 from datetime import datetime
+from os import makedirs
+from pathlib import Path
 
 DOWNLOAD_DIR = "downloads"
 LOG_FILE = Path(DOWNLOAD_DIR) / "logs.log"
@@ -170,5 +171,12 @@ def download_public_photos(username: str, max_posts: int = 10, start_post: int =
 
 
 # Execute
+start_time = time.time()
 download_public_photos(username="ar.guto", max_posts=10, start_post=1)
 download_public_videos(username="ar.guto", max_posts=5, start_post=1)
+
+elapsed_time = time.time() - start_time
+hours, remainder = divmod(elapsed_time, 3600)
+minutes, seconds = divmod(remainder, 60)
+time_str = f"{int(hours):02d}:{int(minutes):02d}:{seconds:05.2f}"
+log_message(f"Total execution time: {time_str}")
