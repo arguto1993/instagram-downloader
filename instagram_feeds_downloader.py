@@ -1,25 +1,35 @@
 import instaloader
+import logging
 import time
-from datetime import datetime
 from os import makedirs
 from pathlib import Path
 
 DOWNLOAD_DIR = "downloads"
 LOG_FILE = Path(DOWNLOAD_DIR) / "logs.log"
 
+# Ensure logs directory exists
+LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
+
+# Set up logging to both file and console
+logger = logging.getLogger("instagram_downloader")
+logger.setLevel(logging.INFO)
+logger.handlers.clear()  # Clear any existing handlers to prevent duplicates
+formatter = logging.Formatter("[%(asctime)s] %(message)s", "%Y-%m-%d %H:%M:%S")
+
+# File handler
+file_handler = logging.FileHandler(LOG_FILE, encoding="utf-8")
+file_handler.setFormatter(formatter)
+logger.addHandler(file_handler)
+
+# Console handler
+console_handler = logging.StreamHandler()
+console_handler.setFormatter(formatter)
+logger.addHandler(console_handler)
+
 
 def log_message(message: str):
     """Log message to both terminal and file with timestamp"""
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    log_entry = f"[{timestamp}] {message}"
-    print(log_entry)
-
-    # Ensure logs directory exists
-    LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
-
-    # Append to log file
-    with open(LOG_FILE, "a", encoding="utf-8") as f:
-        f.write(log_entry + "\n")
+    logger.info(message)
 
 
 def download_public_videos(username: str, max_posts: int = 10, start_post: int = 1):
