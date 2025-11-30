@@ -13,6 +13,7 @@ LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
 # Set up logging to both file and console
 logger = logging.getLogger("instagram_downloader")
 logger.setLevel(logging.INFO)
+logger.handlers.clear()  # Clear any existing handlers to prevent duplicates
 formatter = logging.Formatter("[%(asctime)s] %(message)s", "%Y-%m-%d %H:%M:%S")
 
 # File handler
